@@ -215,11 +215,6 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
     return self;
 }
 
-- (void)dealloc;
-{
-    [glContext release];
-    [super dealloc];
-}
 
 - (void)startAnimation
 {
