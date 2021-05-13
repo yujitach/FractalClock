@@ -158,8 +158,9 @@ getRootAndRotators(BOOL isPreview, NSRect bounds, Rotator r0, Rotator r1)
 }
 
 static void
-drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned int depthLeft, float* color)
+drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned int depthLeft, float* color, float wid)
 {
+    if(wid<1)wid=1;
     NSPoint p2 = NSMakePoint(
             line->origin.x + line->size.width,
             line->origin.y + line->size.height);
@@ -173,15 +174,17 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
         newLine.size = rotateSize(r0, line->size);
         newColor[0] = ColorAdjustment * color[0];
         newColor[2] = .1 + ColorAdjustment * color[2];
-        drawBranch(&newLine, r0, r1, depth + 1, depthLeft - 1, newColor);
+        drawBranch(&newLine, r0, r1, depth + 1, depthLeft - 1, newColor,wid*0.3);
 
         newLine.size = rotateSize(r1, line->size);
         newColor[0] = .1 + ColorAdjustment * color[0];
         newColor[2] = ColorAdjustment * color[2];
-        drawBranch(&newLine, r0, r1, depth + 1, depthLeft - 1, newColor);
+        drawBranch(&newLine, r0, r1, depth + 1, depthLeft - 1, newColor,wid*0.8);
     }
 
     glColor4f(color[0], color[1], color[2], alphaForDepth[depth]);
+    glLineWidth(wid);
+    glBegin(GL_LINES);
     if (depth == 0) {
         glVertex2f(
             line->origin.x + line->size.width * .5,
@@ -189,6 +192,7 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
     } else
         glVertex2f(line->origin.x, line->origin.y);
     glVertex2f(p2.x, p2.y);
+    glEnd();
 }
 
 @implementation FractalClockView
@@ -294,10 +298,7 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
     Rotator r1;
     NSRect root = getRootAndRotators([self isPreview], bounds, r0, r1);
 
-    glLineWidth(2.);
-    glBegin(GL_LINES);
-        drawBranch(&root, r0, r1, 0, targetDepth, rootColor);
-    glEnd();
+        drawBranch(&root, r0, r1, 0, targetDepth, rootColor,10);
     glFlush();
     glFinish();
     
