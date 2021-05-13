@@ -33,6 +33,7 @@ static GLIContext cgl_rend;
 
 typedef float Rotator[2];
 float alphaForDepth[MaxDepth];
+static float ratio=1;
 
 static double
 transition(double now, double transitionSeconds, ...)
@@ -183,7 +184,7 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
     }
 
     glColor4f(color[0], color[1], color[2], alphaForDepth[depth]);
-    glLineWidth(wid);
+    glLineWidth(ratio*wid);
     glBegin(GL_LINES);
     if (depth == 0) {
         glVertex2f(
@@ -196,7 +197,6 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
 }
 
 @implementation FractalClockView
-
 + (void)initialize;
 {
     alphaForDepth[0] = 1;
@@ -282,8 +282,9 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
 
     NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
 
-    NSRect bounds = [self bounds];
-
+    NSRect obounds = [self bounds];
+    NSRect bounds=[self convertRectToBacking:obounds];
+    ratio=bounds.size.width/obounds.size.width;
     glViewport(0, 0, bounds.size.width, bounds.size.height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
