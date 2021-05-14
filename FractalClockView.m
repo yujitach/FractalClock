@@ -201,7 +201,7 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
 {
     alphaForDepth[0] = 1;
     for (int i = 1; i < MaxDepth; ++i)
-        alphaForDepth[i] = pow(i, -1.0);
+        alphaForDepth[i] = pow(i, -0.9);
 }
 
 - (id)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview
@@ -223,7 +223,7 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
     ++viewsCount;
     totalPixelCount += [self bounds].size.width * [self bounds].size.height;
 
-    targetDepth = 4;
+    targetDepth = 8;
     framesBetweenDepthChanges = FramesPerSecond;
     accumulatedFrames = 0;
     accumulatedSeconds = 0;
