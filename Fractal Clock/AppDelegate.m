@@ -33,6 +33,11 @@
     [self.clockView stopAnimation];
 }
 
+-(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    return YES;
+}
+
 -(IBAction) installScreenSaver:(id)sender
 {
     NSString*saver=[[NSBundle mainBundle] pathForResource:@"FractalClock" ofType:@"saver"];
