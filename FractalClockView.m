@@ -158,6 +158,41 @@ getRootAndRotators(BOOL isPreview, NSRect bounds, Rotator r0, Rotator r1)
     return root;
 }
 
+void drawFilledCircle(GLfloat x, GLfloat y, GLfloat radius){
+    int i;
+    int triangleAmount = 100; //# of triangles used to draw circle
+    
+    //GLfloat radius = 0.8f; //radius
+    GLfloat twicePi = 2.0f * M_PI;
+    
+    glBegin(GL_TRIANGLE_FAN);
+        glVertex2f(x, y); // center of circle
+        for(i = 0; i <= triangleAmount;i++) {
+            glVertex2f(
+                    x + (radius * cos(i *  twicePi / triangleAmount)),
+                y + (radius * sin(i * twicePi / triangleAmount))
+            );
+        }
+    glEnd();
+}
+
+void drawHollowCircle(GLfloat x, GLfloat y, GLfloat radius){
+    int i;
+    int lineAmount = 100; //# of triangles used to draw circle
+    
+    //GLfloat radius = 0.8f; //radius
+    GLfloat twicePi = 2.0f * M_PI;
+    
+    glBegin(GL_LINE_LOOP);
+        for(i = 0; i <= lineAmount;i++) {
+            glVertex2f(
+                x + (radius * cos(i *  twicePi / lineAmount)),
+                y + (radius* sin(i * twicePi / lineAmount))
+            );
+        }
+    glEnd();
+}
+
 static void
 drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned int depthLeft, float* color, float wid)
 {
@@ -182,6 +217,11 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
         newColor[2] = ColorAdjustment * color[2];
         drawBranch(&newLine, r0, r1, depth + 1, depthLeft - 1, newColor,wid*0.8);
     }
+
+    float radius=sqrt(line->size.height*line->size.height+line->size.width*line->size.width);
+    glColor4f(color[0], color[1], color[2], .1*alphaForDepth[depth]);
+    glLineWidth(ratio*1);
+    drawFilledCircle(p2.x,p2.y, radius);
 
     glColor4f(color[0], color[1], color[2], alphaForDepth[depth]);
     glLineWidth(ratio*wid);
