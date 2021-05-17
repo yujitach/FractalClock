@@ -158,6 +158,8 @@ getRootAndRotators(BOOL isPreview, NSRect bounds, Rotator r0, Rotator r1)
     return root;
 }
 
+// taken from https://gist.github.com/linusthe3rd/803118
+
 void drawFilledCircle(GLfloat x, GLfloat y, GLfloat radius){
     int i;
     int triangleAmount = 100; //# of triangles used to draw circle
