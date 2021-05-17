@@ -221,7 +221,7 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
     }
 
     float radius=sqrt(line->size.height*line->size.height+line->size.width*line->size.width);
-    glColor4f(color[0], color[1], color[2], .1*alphaForDepth[depth]);
+    glColor4f(color[0], color[1], color[2], .05*alphaForDepth[depth]);
     glLineWidth(ratio*1);
     drawFilledCircle(p2.x,p2.y, radius);
 
@@ -293,8 +293,8 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
     glEnable(GL_ALPHA_TEST);
     glAlphaFunc(GL_GREATER, 1./255);
     
-    glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
     glEnable(GL_LINE_SMOOTH);
+    glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 }
 
 - (void)stopAnimation
