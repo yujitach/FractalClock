@@ -254,9 +254,14 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
         
     [self setAnimationTimeInterval:1./FramesPerSecond];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewSizeChanged:) name:NSViewFrameDidChangeNotification object:nil];
     return self;
 }
 
+-(void)viewSizeChanged:(NSNotification*)notification
+{
+    [glContext update];
+}
 
 - (void)startAnimation
 {
@@ -313,6 +318,7 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
         // startAnimation hasn't been called yet.
         return;
     }
+    [glContext setView:self];
     [glContext makeCurrentContext];
     cgl_ctx = CGLGetCurrentContext();
     cgl_rend = cgl_ctx->rend;
@@ -350,7 +356,7 @@ drawBranch(NSRect* line, Rotator r0, Rotator r1, unsigned int depth, unsigned in
         
         if (framesPerSecond > 2.5*FramesPerSecond)
             ++targetDepth;
-        else if (framesPerSecond < 1.5*FramesPerSecond)
+        else if (framesPerSecond < .5*FramesPerSecond)
             --targetDepth;
         
         double maxDepth = ceil(log2(sqrt(totalPixelCount)));
