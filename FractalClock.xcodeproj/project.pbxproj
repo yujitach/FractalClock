@@ -13,6 +13,7 @@
 		333072D52652A84100E50A2A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333072D32652A84100E50A2A /* MainMenu.xib */; };
 		333072D82652A84100E50A2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 333072D72652A84100E50A2A /* main.m */; };
 		333072DD2652A87200E50A2A /* FractalClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500797A0118B23001CA0E54 /* FractalClockView.m */; };
+		33AD7A4C26534BB100022654 /* FractalClock.saver in Resources */ = {isa = PBXBuildFile; fileRef = 33AD7A4B26534BB100022654 /* FractalClock.saver */; };
 		8D255AC70486D3F9007BF209 /* FractalClock_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA80370C50100C91783 /* FractalClock_Prefix.pch */; };
 		8D255AC80486D3F9007BF209 /* FractalClockView.h in Headers */ = {isa = PBXBuildFile; fileRef = F50079790118B23001CA0E54 /* FractalClockView.h */; };
 		8D255ACA0486D3F9007BF209 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -43,6 +44,7 @@
 		333072D72652A84100E50A2A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		333072D92652A84100E50A2A /* Fractal_Clock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fractal_Clock.entitlements; sourceTree = "<group>"; };
 		333072E22652C20C00E50A2A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		33AD7A4B26534BB100022654 /* FractalClock.saver */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FractalClock.saver; path = intermediate/FractalClock.saver; sourceTree = "<group>"; };
 		8D255AD20486D3F9007BF209 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D255AD30486D3F9007BF209 /* FractalClock.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FractalClock.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50079790118B23001CA0E54 /* FractalClockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FractalClockView.h; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				33AD7A4B26534BB100022654 /* FractalClock.saver */,
 				8D255AD20486D3F9007BF209 /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				333072D22652A84100E50A2A /* Assets.xcassets in Resources */,
+				33AD7A4C26534BB100022654 /* FractalClock.saver in Resources */,
 				333072D52652A84100E50A2A /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
